@@ -1,85 +1,120 @@
+// Get HTML Elements
 const form = document.getElementById("blogForm");
-
 const title = document.getElementById("title");
-
 const author = document.getElementById("author");
-
 const content = document.getElementById("content");
 
 const titleError = document.getElementById("titleError");
-
 const authorError = document.getElementById("authorError");
-
 const contentError = document.getElementById("contentError");
 
 const blogContainer = document.getElementById("blogContainer");
 
-form.addEventListener("submit", function(e){
+// Form Submit Event
+form.addEventListener("submit", function (e) {
 
-e.preventDefault();
+    e.preventDefault();
 
-let valid = true;
+    let valid = true;
 
-titleError.textContent="";
-authorError.textContent="";
-contentError.textContent="";
+    // Clear previous error messages
+    titleError.textContent = "";
+    authorError.textContent = "";
+    contentError.textContent = "";
 
-title.classList.remove("error");
-author.classList.remove("error");
-content.classList.remove("error");
+    title.classList.remove("error");
+    author.classList.remove("error");
+    content.classList.remove("error");
 
-if(title.value.trim()==""){
+    // Validation
+    if (title.value.trim() === "") {
+        titleError.textContent = "Title is required";
+        title.classList.add("error");
+        valid = false;
+    }
 
-titleError.textContent="Title is required";
+    if (author.value.trim() === "") {
+        authorError.textContent = "Author name is required";
+        author.classList.add("error");
+        valid = false;
+    }
 
-title.classList.add("error");
+    if (content.value.trim().length < 20) {
+        contentError.textContent = "Content should be at least 20 characters";
+        content.classList.add("error");
+        valid = false;
+    }
 
-valid=false;
+    // If validation passes
+    if (valid) {
 
-}
+        fetch("/api/blogs", {
 
-if(author.value.trim()==""){
+            method: "POST",
 
-authorError.textContent="Author name is required";
+            headers: {
+                "Content-Type": "application/json"
+            },
 
-author.classList.add("error");
+            body: JSON.stringify({
+                title: title.value,
+                author: author.value,
+                content: content.value
+            })
 
-valid=false;
+        })
+        .then(response => response.json())
+        .then(data => {
 
-}
+            alert(data.message);
 
-if(content.value.trim().length<20){
+            form.reset();
 
-contentError.textContent="Content should be at least 20 characters";
+            loadBlogs();
 
-content.classList.add("error");
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
 
-valid=false;
-
-}
-
-if(valid){
-
-const card=document.createElement("div");
-
-card.className="card";
-
-card.innerHTML=`
-
-<h3>${title.value}</h3>
-
-<p><b>Author:</b> ${author.value}</p>
-
-<p>${content.value}</p>
-
-`;
-
-blogContainer.prepend(card);
-
-form.reset();
-
-alert("Blog Published Successfully!");
-
-}
+    }
 
 });
+
+// Load Blogs Function
+function loadBlogs() {
+
+    fetch("/api/blogs")
+
+        .then(response => response.json())
+
+        .then(data => {
+
+            blogContainer.innerHTML = "";
+
+            data.forEach(blog => {
+
+                const card = document.createElement("div");
+
+                card.className = "card";
+
+                card.innerHTML = `
+                    <h3>${blog.title}</h3>
+                    <p><strong>Author:</strong> ${blog.author}</p>
+                    <p>${blog.content}</p>
+                `;
+
+                blogContainer.prepend(card);
+
+            });
+
+        })
+
+        .catch(error => {
+            console.error("Error loading blogs:", error);
+        });
+
+}
+
+// Load blogs when page opens
+loadBlogs();
