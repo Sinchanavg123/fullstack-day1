@@ -37,105 +37,78 @@
     <!-- Blog Section -->
     <section class="container">
 
-        <h2 class="title">Featured Blogs</h2>
+<h2 class="title">Add New Blog</h2>
 
-        <div class="cards">
+<form id="blogForm">
 
-            <div class="card">
+<div class="form-group">
 
-                <h3>Getting Started with HTML</h3>
+<label>Blog Title</label>
 
-                <p>
-                    Learn the basics of HTML and build the structure of modern websites using semantic elements.
-                </p>
+<input
+type="text"
+id="title"
+placeholder="Enter Blog Title">
 
-                <br>
+<small id="titleError"></small>
 
-                <a href="#" class="btn">Read More</a>
+</div>
 
-            </div>
+<div class="form-group">
 
-            <div class="card">
+<label>Author Name</label>
 
-                <h3>Mastering CSS</h3>
+<input
+type="text"
+id="author"
+placeholder="Enter Author Name">
 
-                <p>
-                    Explore layouts, Flexbox, Grid, animations, and responsive web design techniques.
-                </p>
+<small id="authorError"></small>
 
-                <br>
+</div>
 
-                <a href="#" class="btn">Read More</a>
+<div class="form-group">
 
-            </div>
+<label>Blog Content</label>
 
-            <div class="card">
+<textarea
+id="content"
+rows="6"
+placeholder="Write your blog here..."></textarea>
 
-                <h3>JavaScript Essentials</h3>
+<small id="contentError"></small>
 
-                <p>
-                    Learn variables, functions, DOM manipulation, events, and modern JavaScript concepts.
-                </p>
+</div>
 
-                <br>
+<button class="submit-btn">
+Publish Blog
+</button>
 
-                <a href="#" class="btn">Read More</a>
+</form>
 
-            </div>
+</section>
 
-            <div class="card">
+<hr>
 
-                <h3>Node.js Fundamentals</h3>
+<section class="container">
 
-                <p>
-                    Understand how Node.js works and create fast server-side applications using JavaScript.
-                </p>
+<h2 class="title">Published Blogs</h2>
 
-                <br>
+<div class="cards" id="blogContainer">
 
-                <a href="#" class="btn">Read More</a>
+</div>
 
-            </div>
-
-            <div class="card">
-
-                <h3>Express.js Guide</h3>
-
-                <p>
-                    Build REST APIs and web applications quickly using the lightweight Express framework.
-                </p>
-
-                <br>
-
-                <a href="#" class="btn">Read More</a>
-
-            </div>
-
-            <div class="card">
-
-                <h3>Future Full Stack Roadmap</h3>
-
-                <p>
-                    Discover the technologies and skills required to become a successful Full Stack Developer.
-                </p>
-
-                <br>
-
-                <a href="#" class="btn">Read More</a>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- Footer -->
+</section>
     <footer>
 
         <p>© 2025 DevBlog | Designed by Sinchana | All Rights Reserved</p>
 
     </footer>
 
-</body>
 
+<script src="script.js"></script>
+
+</body>
 </html>
+
+   
