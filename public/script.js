@@ -1,4 +1,4 @@
-// Get HTML Elements
+// Get Elements
 const form = document.getElementById("blogForm");
 const title = document.getElementById("title");
 const author = document.getElementById("author");
@@ -10,111 +10,97 @@ const contentError = document.getElementById("contentError");
 
 const blogContainer = document.getElementById("blogContainer");
 
-// Form Submit Event
+// Submit Form
 form.addEventListener("submit", function (e) {
 
     e.preventDefault();
 
-    let valid = true;
-
-    // Clear previous error messages
     titleError.textContent = "";
     authorError.textContent = "";
     contentError.textContent = "";
 
-    title.classList.remove("error");
-    author.classList.remove("error");
-    content.classList.remove("error");
+    let valid = true;
 
-    // Validation
     if (title.value.trim() === "") {
         titleError.textContent = "Title is required";
-        title.classList.add("error");
         valid = false;
     }
 
     if (author.value.trim() === "") {
-        authorError.textContent = "Author name is required";
-        author.classList.add("error");
+        authorError.textContent = "Author is required";
         valid = false;
     }
 
     if (content.value.trim().length < 20) {
-        contentError.textContent = "Content should be at least 20 characters";
-        content.classList.add("error");
+        contentError.textContent = "Content must be at least 20 characters";
         valid = false;
     }
 
-    // If validation passes
-    if (valid) {
+    if (!valid) return;
 
-        fetch("/api/blogs", {
+    const blog = {
+        title: title.value,
+        author: author.value,
+        content: content.value
+    };
 
-            method: "POST",
+    fetch("/api/blogs", {
 
-            headers: {
-                "Content-Type": "application/json"
-            },
+        method: "POST",
 
-            body: JSON.stringify({
-                title: title.value,
-                author: author.value,
-                content: content.value
-            })
+        headers: {
+            "Content-Type": "application/json"
+        },
 
-        })
-        .then(response => response.json())
-        .then(data => {
+        body: JSON.stringify(blog)
 
-            alert(data.message);
+    })
 
-            form.reset();
+    .then(response => response.json())
 
-            loadBlogs();
+    .then(data => {
 
-        })
-        .catch(error => {
-            console.error("Error:", error);
-        });
+        alert(data.message);
 
-    }
+        form.reset();
+
+        loadBlogs();
+
+    })
+
+    .catch(error => console.log(error));
 
 });
 
-// Load Blogs Function
+// Load Blogs
 function loadBlogs() {
 
     fetch("/api/blogs")
 
-        .then(response => response.json())
+    .then(response => response.json())
 
-        .then(data => {
+    .then(data => {
 
-            blogContainer.innerHTML = "";
+        blogContainer.innerHTML = "";
 
-            data.forEach(blog => {
+        data.forEach(blog => {
 
-                const card = document.createElement("div");
+            const card = document.createElement("div");
 
-                card.className = "card";
+            card.className = "card";
 
-                card.innerHTML = `
-                    <h3>${blog.title}</h3>
-                    <p><strong>Author:</strong> ${blog.author}</p>
-                    <p>${blog.content}</p>
-                `;
+            card.innerHTML = `
+                <h3>${blog.title}</h3>
+                <h4>By ${blog.author}</h4>
+                <p>${blog.content}</p>
+            `;
 
-                blogContainer.prepend(card);
+            blogContainer.prepend(card);
 
-            });
-
-        })
-
-        .catch(error => {
-            console.error("Error loading blogs:", error);
         });
+
+    });
 
 }
 
-// Load blogs when page opens
 loadBlogs();
