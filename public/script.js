@@ -128,20 +128,29 @@ function loadBlogs() {
 
             card.innerHTML = `
 
-                <h3>${blog.title}</h3>
+           <h3>${blog.title}</h3>
 
-                <h4>By ${blog.author}</h4>
+           <h4>By ${blog.author}</h4>
 
-                <p>${blog.content}</p>
+           <p>${blog.content}</p>
 
-                <button
-                    class="edit-btn"
-                    onclick="editBlog(${blog.id})">
-                    Edit
+          <div class="button-group">
+
+           <button
+             class="edit-btn"
+             onclick="editBlog(${blog.id})">
+              Edit
+            </button>
+
+              <button
+                  class="delete-btn"
+                  onclick="deleteBlog(${blog.id})">
+                  Delete
                 </button>
 
-            `;
+                  </div>
 
+`                ;
             blogContainer.prepend(card);
 
         });
@@ -195,3 +204,31 @@ function editBlog(id) {
 // Initial Load
 // ===============================
 loadBlogs();
+// Delete Blog
+function deleteBlog(id) {
+
+    const confirmDelete = confirm("Are you sure you want to delete this blog?");
+
+    if (!confirmDelete) {
+        return;
+    }
+
+    fetch(`/api/blogs/${id}`, {
+
+        method: "DELETE"
+
+    })
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        alert(data.message);
+
+        loadBlogs();
+
+    })
+
+    .catch(error => console.error(error));
+
+}

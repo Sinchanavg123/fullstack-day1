@@ -1,106 +1,141 @@
 const express = require("express");
 const path = require("path");
+const fs = require("fs");
 
 const app = express();
 const PORT = 3000;
 
-// Middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// Serve Static Files
 app.use(express.static(path.join(__dirname, "public")));
 
-// JavaScript Array to Store Blogs
-let blogs = [];
+const BLOG_FILE = path.join(__dirname, "blogs.json");
 
-// GET All Blogs
+// Read blogs from file
+function readBlogs() {
+    try {
+        const data = fs.readFileSync(BLOG_FILE, "utf8");
+
+        if (!data) return [];
+
+        return JSON.parse(data);
+    } catch (err) {
+        return [];
+    }
+}
+
+// Save blogs into file
+function saveBlogs(blogs) {
+    fs.writeFileSync(BLOG_FILE, JSON.stringify(blogs, null, 2));
+}
+
+// =====================
+// GET ALL BLOGS
+// =====================
+
 app.get("/api/blogs", (req, res) => {
+
+    const blogs = readBlogs();
+
     res.json(blogs);
+
 });
 
-// POST Add Blog
+// =====================
+// ADD BLOG
+// =====================
+
 app.post("/api/blogs", (req, res) => {
 
-    const { title, author, content } = req.body;
-
-    // Validate Data
-    if (!title || !author || !content) {
-        return res.status(400).json({
-            message: "All fields are required"
-        });
-    }
-    // PUT - Update Blog
-app.put("/api/blogs/:id", (req, res) => {
-
-    const id = parseInt(req.params.id);
+    const blogs = readBlogs();
 
     const { title, author, content } = req.body;
 
-    const blog = blogs.find(blog => blog.id === id);
+    const newBlog = {
 
-    if (!blog) {
+        id: Date.now(),
 
-        return res.status(404).json({
-            message: "Blog Not Found"
-        });
+        title,
 
-    }
+        author,
 
-    blog.title = title;
-    blog.author = author;
-    blog.content = content;
+        content
+
+    };
+
+    blogs.push(newBlog);
+
+    saveBlogs(blogs);
 
     res.json({
 
-        message: "Blog Updated Successfully",
+        message: "Blog Published Successfully!",
 
-        blog
+        blog: newBlog
 
     });
 
 });
 
-    const newBlog = {
-        id: blogs.length + 1,
-        title,
-        author,
-        content
-    };
+// =====================
+// UPDATE BLOG
+// =====================
 
-    blogs.push(newBlog);
+app.put("/api/blogs/:id", (req, res) => {
 
-    res.status(201).json({
-        message: "Blog Added Successfully!",
-        blog: newBlog
+    const blogs = readBlogs();
+
+    const id = Number(req.params.id);
+
+    const blog = blogs.find(b => b.id === id);
+
+    if (!blog) {
+
+        return res.status(404).json({
+
+            message: "Blog not found"
+
+        });
+
+    }
+
+    blog.title = req.body.title;
+    blog.author = req.body.author;
+    blog.content = req.body.content;
+
+    saveBlogs(blogs);
+
+    res.json({
+
+        message: "Blog Updated Successfully!"
+
+    });
+
+});
+
+// =====================
+// DELETE BLOG
+// =====================
+
+app.delete("/api/blogs/:id", (req, res) => {
+
+    let blogs = readBlogs();
+
+    const id = Number(req.params.id);
+
+    blogs = blogs.filter(blog => blog.id !== id);
+
+    saveBlogs(blogs);
+
+    res.json({
+
+        message: "Blog Deleted Successfully!"
+
     });
 
 });
 
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-});
-app.put("/api/blogs/:id", (req, res) => {
 
-    const id = parseInt(req.params.id);
-
-    const { title, author, content } = req.body;
-
-    const blog = blogs.find(blog => blog.id === id);
-
-    if (!blog) {
-        return res.status(404).json({
-            message: "Blog not found"
-        });
-    }
-
-    blog.title = title;
-    blog.author = author;
-    blog.content = content;
-
-    res.json({
-        message: "Blog Updated Successfully!",
-        blog
-    });
+    console.log(`Server running at http://localhost:${PORT}`);
 
 });
