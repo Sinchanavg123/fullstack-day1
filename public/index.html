@@ -2,34 +2,62 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>DevBlog | Home</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
+    <div id="progressBar"></div>
 
     <!-- Navigation -->
-    <nav>
 
-        <div class="logo">DevBlog</div>
+    
+<nav>
 
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="blog.html">Blog</a></li>
-        </ul>
+    <div class="logo">DevBlog</div>
+
+    <div class="menu-toggle" id="menuToggle">
+
+        ☰
+
+    </div>
+
+    <ul id="navLinks">
+
+        <li><a href="index.html">Home</a></li>
+
+        <li><a href="blog.html">Blog</a></li>
+
+    </ul>
+
+    <button id="themeToggle" class="theme-btn">
+
+        🌙
+
+    </button>
+
+
 
     </nav>
 
     <!-- Hero Section -->
+
     <section class="hero">
 
         <h1>Build Your Future with Full Stack Development</h1>
 
         <p>
-            Learn HTML, CSS, JavaScript, Node.js & Express through practical projects.
+
+            Learn HTML, CSS, JavaScript, Node.js and Express by building
+            real-world projects with a modern and interactive learning experience.
+
         </p>
 
         <a href="blog.html" class="btn">Start Blogging</a>
@@ -37,38 +65,48 @@
     </section>
 
     <!-- Features -->
+
     <section class="container">
 
-        <h2 class="title">Our Features</h2>
+        <h2 class="title">Why Choose DevBlog?</h2>
 
         <div class="cards">
 
             <div class="card">
 
-                <h3>Modern HTML</h3>
+                <h3>🚀 Modern Development</h3>
 
                 <p>
-                    Build semantic and accessible webpages using HTML5.
+
+                    Learn modern HTML5, CSS3, JavaScript, Express.js and
+                    Node.js through practical examples.
+
                 </p>
 
             </div>
 
             <div class="card">
 
-                <h3>Beautiful UI</h3>
+                <h3>🎨 Professional UI/UX</h3>
 
                 <p>
-                    Create attractive and responsive websites using CSS.
+
+                    Responsive layouts, beautiful animations,
+                    smooth transitions and attractive interfaces.
+
                 </p>
 
             </div>
 
             <div class="card">
 
-                <h3>Express Backend</h3>
+                <h3>💻 Full Stack Projects</h3>
 
                 <p>
-                    Develop powerful backend applications using Node.js and Express.
+
+                    Build complete applications using
+                    frontend and backend technologies.
+
                 </p>
 
             </div>
@@ -77,28 +115,90 @@
 
     </section>
 
+
     <!-- Latest Blogs -->
+
     <section class="container">
 
         <h2 class="title">Latest Blogs</h2>
 
         <div class="cards" id="homeBlogContainer">
 
-            <!-- Blogs will appear here automatically -->
+            <!-- Blogs loaded from home.js -->
 
         </div>
 
     </section>
 
+    <!-- About -->
+
+    <section class="container">
+
+        <h2 class="title">About DevBlog</h2>
+
+        <div class="card" style="max-width:900px;margin:auto;text-align:center;">
+
+            <h3>Share Your Knowledge</h3>
+
+            <p>
+
+                DevBlog is a simple Full Stack blogging platform where
+                users can publish, edit, view and delete blogs.
+                It demonstrates complete CRUD operations using
+                HTML, CSS, JavaScript, Express.js and Fetch API.
+
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- Call To Action -->
+
+    <section class="container">
+
+        <div class="card" style="max-width:900px;margin:auto;text-align:center;">
+
+            <h2>Start Your Blogging Journey Today</h2>
+
+            <p style="margin-top:20px;">
+
+                Create your first blog and share your ideas with everyone.
+
+            </p>
+
+            <a href="blog.html" class="btn">
+
+                Create Blog
+
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- Scroll To Top Button -->
+
+    <button id="topBtn">↑</button>
+
     <!-- Footer -->
+
     <footer>
 
-        <p>© 2025 DevBlog | Designed by Sinchana | All Rights Reserved</p>
+        <p>
+
+            © 2025 DevBlog |
+            Designed by Sinchana |
+            All Rights Reserved.
+
+        </p>
 
     </footer>
 
-    <!-- Home JavaScript -->
+    <!-- Home JS -->
+
     <script src="home.js"></script>
+    <script src="theme.js"></script>
 
 </body>
 
