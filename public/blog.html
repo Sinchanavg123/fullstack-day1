@@ -18,7 +18,7 @@
 
         <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="blog.html">Blog</a></li>
+            <li><a href="blog.html" class="active">Blog</a></li>
         </ul>
 
     </nav>
@@ -26,89 +26,96 @@
     <!-- Hero Section -->
     <section class="hero">
 
-        <h1>Latest Blog Articles</h1>
+        <h1>Manage Your Blogs</h1>
 
-        <p>Stay updated with web development trends and programming tutorials.</p>
+        <p>Create, edit and manage your blog posts with ease.</p>
 
         <a href="index.html" class="btn">Back to Home</a>
 
     </section>
 
-    <!-- Blog Section -->
+    <!-- Add/Edit Blog Form -->
     <section class="container">
 
-<h2 class="title">Add New Blog</h2>
+        <h2 class="title">Add / Edit Blog</h2>
 
-<form id="blogForm">
+        <form id="blogForm">
 
-<div class="form-group">
+            <!-- Hidden field used while editing -->
+            <input type="hidden" id="blogId">
 
-<label>Blog Title</label>
+            <div class="form-group">
 
-<input
-type="text"
-id="title"
-placeholder="Enter Blog Title">
+                <label for="title">Blog Title</label>
 
-<small id="titleError"></small>
+                <input
+                    type="text"
+                    id="title"
+                    placeholder="Enter Blog Title">
 
-</div>
+                <small id="titleError"></small>
 
-<div class="form-group">
+            </div>
 
-<label>Author Name</label>
+            <div class="form-group">
 
-<input
-type="text"
-id="author"
-placeholder="Enter Author Name">
+                <label for="author">Author Name</label>
 
-<small id="authorError"></small>
+                <input
+                    type="text"
+                    id="author"
+                    placeholder="Enter Author Name">
 
-</div>
+                <small id="authorError"></small>
 
-<div class="form-group">
+            </div>
 
-<label>Blog Content</label>
+            <div class="form-group">
 
-<textarea
-id="content"
-rows="6"
-placeholder="Write your blog here..."></textarea>
+                <label for="content">Blog Content</label>
 
-<small id="contentError"></small>
+                <textarea
+                    id="content"
+                    rows="6"
+                    placeholder="Write your blog here..."></textarea>
 
-</div>
+                <small id="contentError"></small>
 
-<button class="submit-btn">
-Publish Blog
-</button>
+            </div>
 
-</form>
+            <button type="submit" class="submit-btn">
 
-</section>
+                Publish / Update Blog
 
-<hr>
+            </button>
 
-<section class="container">
+        </form>
 
-<h2 class="title">Published Blogs</h2>
+    </section>
 
-<div class="cards" id="blogContainer">
+    <!-- Published Blogs -->
+    <section class="container">
 
-</div>
+        <h2 class="title">Published Blogs</h2>
 
-</section>
+        <div class="cards" id="blogContainer">
+
+            <!-- Blog cards are added dynamically -->
+
+        </div>
+
+    </section>
+
+    <!-- Footer -->
     <footer>
 
         <p>© 2025 DevBlog | Designed by Sinchana | All Rights Reserved</p>
 
     </footer>
 
-
-<script src="script.js"></script>
+    <!-- JavaScript -->
+    <script src="script.js"></script>
 
 </body>
-</html>
 
-   
+</html>

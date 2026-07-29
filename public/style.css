@@ -247,3 +247,17 @@ border:2px solid green;
 border:2px solid red;
 
 }
+.edit-btn{
+    margin-top:15px;
+    background:#f59e0b;
+    color:white;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.edit-btn:hover{
+    background:#d97706;
+}

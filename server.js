@@ -30,6 +30,36 @@ app.post("/api/blogs", (req, res) => {
             message: "All fields are required"
         });
     }
+    // PUT - Update Blog
+app.put("/api/blogs/:id", (req, res) => {
+
+    const id = parseInt(req.params.id);
+
+    const { title, author, content } = req.body;
+
+    const blog = blogs.find(blog => blog.id === id);
+
+    if (!blog) {
+
+        return res.status(404).json({
+            message: "Blog Not Found"
+        });
+
+    }
+
+    blog.title = title;
+    blog.author = author;
+    blog.content = content;
+
+    res.json({
+
+        message: "Blog Updated Successfully",
+
+        blog
+
+    });
+
+});
 
     const newBlog = {
         id: blogs.length + 1,
@@ -49,4 +79,28 @@ app.post("/api/blogs", (req, res) => {
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
+});
+app.put("/api/blogs/:id", (req, res) => {
+
+    const id = parseInt(req.params.id);
+
+    const { title, author, content } = req.body;
+
+    const blog = blogs.find(blog => blog.id === id);
+
+    if (!blog) {
+        return res.status(404).json({
+            message: "Blog not found"
+        });
+    }
+
+    blog.title = title;
+    blog.author = author;
+    blog.content = content;
+
+    res.json({
+        message: "Blog Updated Successfully!",
+        blog
+    });
+
 });
