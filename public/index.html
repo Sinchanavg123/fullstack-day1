@@ -1,67 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevBlog | Home</title>
 
-<link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<nav>
+    <!-- Navigation -->
+    <nav>
 
-<div class="logo">DevBlog</div>
+        <div class="logo">DevBlog</div>
 
-<ul>
-<li><a href="index.html">Home</a></li>
-<li><a href="blog.html">Blog</a></li>
-</ul>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="blog.html">Blog</a></li>
+        </ul>
 
-</nav>
+    </nav>
 
-<section class="hero">
+    <!-- Hero Section -->
+    <section class="hero">
 
-<h1>Build Your Future with Full Stack Development</h1>
+        <h1>Build Your Future with Full Stack Development</h1>
 
-<p>Learn HTML, CSS, JavaScript, Node.js & Express through practical projects.</p>
+        <p>
+            Learn HTML, CSS, JavaScript, Node.js & Express through practical projects.
+        </p>
 
-<a href="blog.html" class="btn">Read Blogs</a>
+        <a href="blog.html" class="btn">Start Blogging</a>
 
-</section>
+    </section>
 
-<section class="container">
+    <!-- Features -->
+    <section class="container">
 
-<h2 class="title">Our Features</h2>
+        <h2 class="title">Our Features</h2>
 
-<div class="cards">
+        <div class="cards">
 
-<div class="card">
-<h3>Modern HTML</h3>
-<p>Semantic HTML structure for accessibility and clean code.</p>
-</div>
+            <div class="card">
 
-<div class="card">
-<h3>Beautiful UI</h3>
-<p>Responsive layouts with modern design principles.</p>
-</div>
+                <h3>Modern HTML</h3>
 
-<div class="card">
-<h3>Backend Ready</h3>
-<p>Powered by Node.js and Express for scalable web applications.</p>
-</div>
+                <p>
+                    Build semantic and accessible webpages using HTML5.
+                </p>
 
-</div>
+            </div>
 
-</section>
+            <div class="card">
 
-<footer>
+                <h3>Beautiful UI</h3>
 
-<p>© 2025 DevBlog | Full Stack Development</p>
+                <p>
+                    Create attractive and responsive websites using CSS.
+                </p>
 
-</footer>
+            </div>
+
+            <div class="card">
+
+                <h3>Express Backend</h3>
+
+                <p>
+                    Develop powerful backend applications using Node.js and Express.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Latest Blogs -->
+    <section class="container">
+
+        <h2 class="title">Latest Blogs</h2>
+
+        <div class="cards" id="homeBlogContainer">
+
+            <!-- Blogs will appear here automatically -->
+
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+
+        <p>© 2025 DevBlog | Designed by Sinchana | All Rights Reserved</p>
+
+    </footer>
+
+    <!-- Home JavaScript -->
+    <script src="home.js"></script>
 
 </body>
+
 </html>
